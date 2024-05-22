@@ -1,7 +1,7 @@
 package main
 
 import (
-	service "GoLearn/grpc/auto-grpc"
+	"GoLearn/grpc/test1/proto"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
@@ -25,12 +25,12 @@ func main() {
 
 	// 2. 创建客户端对象，这里假设service包中有一个NewHelloServiceClient函数
 	// 该函数接受一个连接对象并返回一个客户端实例
-	client := service.NewHelloServiceClient(conn)
+	client := proto.NewHelloServiceClient(conn)
 
 	// 3. 执行RPC调用，这里调用的是客户端的SayHello方法
 	// SayHello方法需要一个上下文对象和一个HelloRequest消息作为参数
 	// 这里假设HelloRequest消息中有一个Name字段，我们将其设置为"焦糖玛奇朵"
-	resp, err := client.SayHello(context.Background(), &service.HelloRequest{Name: "焦糖玛奇朵"})
+	resp, err := client.SayHello(context.Background(), &proto.HelloRequest{Name: "焦糖玛奇朵"})
 	if err != nil {
 		// 如果执行RPC调用时发生错误，则记录错误日志
 		log.Printf("执行SayHello调用出错: %v\n", err)

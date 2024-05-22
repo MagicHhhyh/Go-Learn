@@ -4,7 +4,7 @@
 // - protoc             v3.9.0
 // source: grpc/test_grpc.proto
 
-package auto_grpc
+package proto
 
 import (
 	context "context"

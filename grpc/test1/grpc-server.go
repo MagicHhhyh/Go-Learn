@@ -1,7 +1,7 @@
 package main
 
 import (
-	service "GoLearn/grpc/auto-grpc"
+	"GoLearn/grpc/test1/proto"
 	"context"
 	"google.golang.org/grpc"
 	"log"
@@ -9,12 +9,12 @@ import (
 )
 
 type server struct {
-	service.UnimplementedHelloServiceServer
+	proto.UnimplementedHelloServiceServer
 }
 
-func (server) SayHello(ctx context.Context, req *service.HelloRequest) (*service.HelloResponse, error) {
+func (server) SayHello(ctx context.Context, req *proto.HelloRequest) (*proto.HelloResponse, error) {
 
-	return &service.HelloResponse{Message: string("我想发送的信息：" + req.Name + "你好！")}, nil
+	return &proto.HelloResponse{Message: string("我想发送的信息：" + req.Name + "你好！")}, nil
 }
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 	// 3. 注册gRPC服务到服务器实例中
 	// 假设我们有一个名为service的包，其中包含RegisterHelloServiceServer函数
 	// 该函数将HelloServiceServer的实现注册到gRPC服务器中
-	service.RegisterHelloServiceServer(grpcServer, &server{})
+	proto.RegisterHelloServiceServer(grpcServer, &server{})
 
 	// 4. 启动gRPC服务器，开始监听并处理来自客户端的请求
 	// 服务器将使用之前创建的监听器来接收连接
