@@ -36,7 +36,6 @@ func main() {
 		log.Printf("执行SayHello调用出错: %v\n", err)
 		return // 发生错误时退出函数
 	}
-
 	// 4. 输出响应结果，这里假设HelloResponse消息中有一个GetMessage方法
 	// 该方法返回一个字符串，我们将其打印到控制台
 	fmt.Println(resp.GetMessage())

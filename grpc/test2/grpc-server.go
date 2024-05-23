@@ -21,7 +21,6 @@ func (server) DownLoadFile(request *proto.Request, stream proto.ServiceStream_Do
 		return err
 	}
 	defer file.Close()
-
 	for {
 		buf := make([]byte, 2048)
 		readSize, err := file.Read(buf)

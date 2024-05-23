@@ -24,7 +24,7 @@ const (
 
 // HelloServiceClient is the client API for HelloService service.
 //
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+// For semantics around ctx user and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HelloServiceClient interface {
 	// 定义函数
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
@@ -95,7 +95,7 @@ func _HelloService_SayHello_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 // HelloService_ServiceDesc is the grpc.ServiceDesc for HelloService service.
-// It's only intended for direct use with grpc.RegisterService,
+// It's only intended for direct user with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HelloService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "grpc.HelloService",

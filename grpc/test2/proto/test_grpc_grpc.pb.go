@@ -24,7 +24,7 @@ const (
 
 // ServiceStreamClient is the client API for ServiceStream service.
 //
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+// For semantics around ctx user and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceStreamClient interface {
 	DownLoadFile(ctx context.Context, in *Request, opts ...grpc.CallOption) (ServiceStream_DownLoadFileClient, error)
 }
@@ -119,7 +119,7 @@ func (x *serviceStreamDownLoadFileServer) Send(m *FileResponse) error {
 }
 
 // ServiceStream_ServiceDesc is the grpc.ServiceDesc for ServiceStream service.
-// It's only intended for direct use with grpc.RegisterService,
+// It's only intended for direct user with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ServiceStream_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "grpcFd.ServiceStream",
