@@ -2,20 +2,33 @@ package main
 
 import (
 	"GoLearn/common/models"
+	"database/sql/driver"
+	"encoding/json"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 type A struct {
-	Awork string `json:"awork"`
+	AW string `json:"cc"`
+}
+
+// Scan 取出来的时候的数据
+func (c *A) Scan(val interface{}) error {
+	return json.Unmarshal(val.([]byte), c)
+}
+
+// Value 入库的数据
+func (c A) Value() (driver.Value, error) {
+	b, err := json.Marshal(c)
+	return string(b), err
 }
 
 type B struct {
 	models.Model
-	A
-	FID    uint64 `json:"fid"`
-	UserId uint   `json:"user_id"`
+	FA    *A     `json:"fa"`
+	FI    uint64 `json:"fid"`
+	UserI uint   `json:"user_id"`
 }
 
 func main() {
@@ -38,5 +51,12 @@ func main() {
 	// 连接成功
 	fmt.Println("Yes")
 	db.AutoMigrate(&B{})
-
+	img := B{
+		FA: &A{
+			AW: "worksing",
+		},
+		FI:    21,
+		UserI: 1,
+	}
+	db.Create(&img) // 注意这里传入的是地址
 }
