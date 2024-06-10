@@ -13,6 +13,14 @@ type Person struct {
 	Email     string `json:"email"`         // 指定 JSON 中的字段名称
 }
 
+func (p Person) getAge() int {
+	p.Age = p.Age + 10
+	return p.Age
+}
+func (p *Person) getEmail(ans string) string {
+	p.Email = ans
+	return p.Email
+}
 func main() {
 	// 创建一个 Person 实例
 	p := Person{
@@ -21,14 +29,26 @@ func main() {
 		Age:       30,
 		Email:     "john.doe@example.com",
 	}
-
+	fp := Person{
+		FirstName: "John",
+		LastName:  "Doe",
+		Age:       30,
+		Email:     "john.doe@example.com",
+	}
+	g := &fp
 	// 将 Person 实例序列化为 JSON 字符串
 	jsonData, err := json.Marshal(p)
 	if err != nil {
 		fmt.Println("Error marshalling JSON:", err)
 		return
 	}
-
 	// 打印序列化后的 JSON 字符串
 	fmt.Println(string(jsonData))
+	fmt.Println(p.getAge())
+	fmt.Println(p.getEmail("email@example.com"))
+	fmt.Println(p)
+	fmt.Println(g.getAge())
+	fmt.Println(g.getEmail("change.john.doe@example.com"))
+	fmt.Println(g)
+
 }
