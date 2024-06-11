@@ -1,34 +1,20 @@
 package main
 
 import (
-	"GoLearn/common/models"
-	"database/sql/driver"
-	"encoding/json"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-type A struct {
-	AW string `json:"cc"`
+// User 有一张 CreditCard，UserID 是外键
+type User struct {
+	gorm.Model
+	CreditCard *CreditCard
 }
-
-// Scan 取出来的时候的数据
-func (c *A) Scan(val interface{}) error {
-	return json.Unmarshal(val.([]byte), c)
-}
-
-// Value 入库的数据
-func (c A) Value() (driver.Value, error) {
-	b, err := json.Marshal(c)
-	return string(b), err
-}
-
-type B struct {
-	models.Model
-	FA    *A     `json:"fa"`
-	FI    uint64 `json:"fid"`
-	UserI uint   `json:"user_id"`
+type CreditCard struct {
+	gorm.Model
+	Number string
+	UserID uint
 }
 
 func main() {
@@ -50,13 +36,6 @@ func main() {
 	}
 	// 连接成功
 	fmt.Println("Yes")
-	db.AutoMigrate(&B{})
-	img := B{
-		FA: &A{
-			AW: "worksing",
-		},
-		FI:    21,
-		UserI: 1,
-	}
-	db.Create(&img) // 注意这里传入的是地址
+	db.AutoMigrate(&User{})
+	db.AutoMigrate(&CreditCard{})
 }
