@@ -1,0 +1,36 @@
+# 指定 Kubernetes API 版本，对于 Deployment 资源，这里是 apps/v1
+apiVersion: apps/v1
+# 定义资源类型，这里是 Deployment
+kind: Deployment
+# 定义资源的元数据，包括名称和标签
+metadata:
+  # 定义资源的名称
+  name: my-nginx-deployment
+  # 定义资源的标签，这些标签用于选择器匹配
+  labels:
+    app: nginx
+# 定义 Deployment 规范，包括副本数量、选择器和 Pod 模板等
+spec:
+  # 定义要运行的副本数量
+  replicas: 3
+  # 定义选择器，用于匹配 Pod 模板中的标签
+  selector:
+    matchLabels:
+      app: nginx
+  # 定义 Pod 模板，这是创建 Pod 时使用的模板
+  template:
+    # 定义 Pod 模板的元数据，包括标签
+    metadata:
+      labels:
+        app: nginx
+    # 定义 Pod 模板的规范，包括容器列表
+    spec:
+      # 定义容器列表，这里只有一个容器
+      containers:
+        # 定义容器的名称
+        - name: nginx
+          # 指定容器使用的镜像
+          image: nginx:1.14.2
+          # 定义容器要暴露的端口
+          ports:
+            - containerPort: 80

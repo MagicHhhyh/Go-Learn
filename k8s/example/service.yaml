@@ -1,0 +1,22 @@
+# 指定 Kubernetes API 版本，对于 Service 资源，这里是 v1
+apiVersion: v1
+# 定义资源类型，这里是 Service
+kind: Service
+# 定义资源的元数据，包括名称
+metadata:
+  # 定义资源的名称
+  name: my-nginx-service
+# 定义 Service 规范，包括选择器、端口和服务类型
+spec:
+  # 定义选择器，用于匹配要暴露的 Pods
+  selector:
+    app: nginx
+  # 定义服务要监听的端口和协议
+  ports:
+    - protocol: TCP
+      # 定义服务端口，这是外部访问服务时使用的端口
+      port: 80
+      # 定义目标端口，这是服务转发流量到 Pod 的端口
+      targetPort: 80
+  # 定义服务的访问类型，这里使用 LoadBalancer 来分配外部 IP
+  type: LoadBalancer
